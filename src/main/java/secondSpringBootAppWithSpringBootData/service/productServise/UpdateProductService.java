@@ -1,11 +1,11 @@
-package secondSpringBootAppWithSpringBootData.service;
+package secondSpringBootAppWithSpringBootData.service.productServise;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import secondSpringBootAppWithSpringBootData.dto.ProductCreateRequestDto;
-import secondSpringBootAppWithSpringBootData.dto.ProductResponseDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;

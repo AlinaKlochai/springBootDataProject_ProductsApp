@@ -1,12 +1,12 @@
-package secondSpringBootAppWithSpringBootData.controller;
+package secondSpringBootAppWithSpringBootData.controller.productController;
 
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import secondSpringBootAppWithSpringBootData.dto.ProductCreateRequestDto;
-import secondSpringBootAppWithSpringBootData.dto.ProductResponseDto;
-import secondSpringBootAppWithSpringBootData.service.UpdateProductService;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
+import secondSpringBootAppWithSpringBootData.service.productServise.UpdateProductService;
 
 @RestController
 @AllArgsConstructor

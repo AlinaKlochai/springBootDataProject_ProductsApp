@@ -1,10 +1,10 @@
-package secondSpringBootAppWithSpringBootData.service;
+package secondSpringBootAppWithSpringBootData.service.productServise;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.entity.Product;
-import secondSpringBootAppWithSpringBootData.dto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;
 

@@ -1,4 +1,4 @@
-package secondSpringBootAppWithSpringBootData.controller;
+package secondSpringBootAppWithSpringBootData.controller.productController;
 
 
 import lombok.AllArgsConstructor;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import secondSpringBootAppWithSpringBootData.dto.ProductCreateRequestDto;
-import secondSpringBootAppWithSpringBootData.service.AddProductService;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.service.productServise.AddProductService;
 
 @RestController
 @RequestMapping("/products")

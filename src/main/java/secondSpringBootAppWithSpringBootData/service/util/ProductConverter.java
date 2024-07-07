@@ -1,8 +1,8 @@
 package secondSpringBootAppWithSpringBootData.service.util;
 
 import org.springframework.stereotype.Service;
-import secondSpringBootAppWithSpringBootData.dto.ProductCreateRequestDto;
-import secondSpringBootAppWithSpringBootData.dto.ProductResponseDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Product;
 
 @Service

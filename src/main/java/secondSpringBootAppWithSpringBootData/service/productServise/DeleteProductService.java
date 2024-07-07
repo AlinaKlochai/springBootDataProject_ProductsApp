@@ -1,4 +1,4 @@
-package secondSpringBootAppWithSpringBootData.service;
+package secondSpringBootAppWithSpringBootData.service.productServise;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

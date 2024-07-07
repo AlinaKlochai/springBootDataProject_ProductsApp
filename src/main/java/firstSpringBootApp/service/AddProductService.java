@@ -1,7 +1,7 @@
 package firstSpringBootApp.service;
 
 import secondSpringBootAppWithSpringBootData.entity.Product;
-import secondSpringBootAppWithSpringBootData.dto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
 import firstSpringBootApp.repository.ProductRepositoryInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

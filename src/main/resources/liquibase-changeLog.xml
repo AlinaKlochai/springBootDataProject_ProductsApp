@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="create.table.client" author="author1">
+        <createTable tableName="client">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create.table.product" author="author1">
+        <createTable tableName="product">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_in_stock" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="product"
+                                 baseColumnNames="client_id"
+                                 constraintName="fk_product_client"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="insert.data.client" author="author1">
+        <insert tableName="client">
+            <column name="id" value="1"/>
+            <column name="first_name" value="John"/>
+            <column name="last_name" value="Doe"/>
+            <column name="password" value="password123"/>
+            <column name="email" value="john.doe@example.com"/>
+        </insert>
+
+        <insert tableName="client">
+            <column name="id" value="2"/>
+            <column name="first_name" value="John"/>
+            <column name="last_name" value="Koll"/>
+            <column name="password" value="password843"/>
+            <column name="email" value="john.koll@example.com"/>
+        </insert>
+
+        <insert tableName="client">
+            <column name="id" value="3"/>
+            <column name="first_name" value="Bill"/>
+            <column name="last_name" value="Koll"/>
+            <column name="password" value="password793"/>
+            <column name="email" value="bill.koll@example.com"/>
+        </insert>
+
+        <insert tableName="client">
+            <column name="id" value="4"/>
+            <column name="first_name" value="Amanda"/>
+            <column name="last_name" value="Doe"/>
+            <column name="password" value="password790"/>
+            <column name="email" value="amadoe@example.com"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert.data.product" author="author1">
+    <insert tableName="product">
+        <column name="id" value="1"/>
+        <column name="name" value="Laptop"/>
+        <column name="category" value="Electronics"/>
+        <column name="price" value="999.99"/>
+        <column name="is_in_stock" value="true"/>
+        <column name="client_id" value="1"/>
+    </insert>
+
+        <insert tableName="product">
+            <column name="id" value="2"/>
+            <column name="name" value="All about Laptop"/>
+            <column name="category" value="Books"/>
+            <column name="price" value="99"/>
+            <column name="is_in_stock" value="true"/>
+            <column name="client_id" value="2"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="3"/>
+            <column name="name" value="Phone"/>
+            <column name="category" value="Electronics"/>
+            <column name="price" value="800.5"/>
+            <column name="is_in_stock" value="true"/>
+            <column name="client_id" value="3"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

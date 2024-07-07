@@ -23,6 +23,10 @@ public class Product {
     private Double price;
     private Boolean isInStock;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     public Product(String name, Category category, Double price, Boolean isInStock) {
         this.name = name;
         this.category = category;

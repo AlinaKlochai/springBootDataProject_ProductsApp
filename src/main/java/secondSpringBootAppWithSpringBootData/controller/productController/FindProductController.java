@@ -1,4 +1,4 @@
-package secondSpringBootAppWithSpringBootData.controller;
+package secondSpringBootAppWithSpringBootData.controller.productController;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import secondSpringBootAppWithSpringBootData.dto.ProductResponseDto;
-import secondSpringBootAppWithSpringBootData.service.FindProductService;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
+import secondSpringBootAppWithSpringBootData.service.productServise.FindProductService;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package firstSpringBootApp.controller;
 
-import secondSpringBootAppWithSpringBootData.dto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
