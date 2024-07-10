@@ -16,5 +16,5 @@ public class ClientResponseDto {
     private String lastName;
     private String password;
     private String email;
-    private List<Product> tasks;
+    private List<Product> products;
 }

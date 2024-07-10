@@ -26,9 +26,8 @@ public class FindProductService {
                .toList();
     }
 
-
-    public ResponseEntity<ProductResponseDto> findProductById(int id) {
-        return productRepository.findById(id)
+    public ResponseEntity<ProductResponseDto> findProductById(int productId) {
+        return productRepository.findById(productId)
                 .map(productConverter::toDto)
                 .map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

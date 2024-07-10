@@ -14,6 +14,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findAllByName(String name);
     List<Product> findAllByCategory(Category category);
 
+    List<Product> findAllByClientId(Integer clientId);
+
     //   @Query("SELECT p FROM Product p WHERE p.category =: category AND p.name =:name")
     List<Product> findAllByCategoryAndAndName(@Param("category") Category category,@Param("name") String name);
 

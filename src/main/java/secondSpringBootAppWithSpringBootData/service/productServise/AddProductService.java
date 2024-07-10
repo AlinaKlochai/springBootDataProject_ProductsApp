@@ -3,26 +3,39 @@ package secondSpringBootAppWithSpringBootData.service.productServise;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import secondSpringBootAppWithSpringBootData.entity.Client;
 import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;
+
+import java.util.Optional;
 
 
 @Service
 public class AddProductService {
     private final ProductRepository productRepository;
     private final ProductConverter productConverter;
+    private final ClientRepository clientRepository;
 
-    public AddProductService(ProductRepository productRepository, ProductConverter productConverter) {
+    public AddProductService(ProductRepository productRepository, ProductConverter productConverter, ClientRepository clientRepository) {
         this.productRepository = productRepository;
         this.productConverter = productConverter;
+        this.clientRepository = clientRepository;
     }
 
     public ResponseEntity<Integer> addProduct(ProductCreateRequestDto requestDto) {
-        Product productForAdd = productConverter.fromDto(requestDto);
+        Optional<Client> clientOpt = clientRepository.findById(requestDto.getClient());
 
-         productRepository.save(productForAdd);
+        if (clientOpt.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Product productForAdd = productConverter.fromDto(requestDto);
+        productForAdd.setClient(clientOpt.get());
+
+        productRepository.save(productForAdd);
         return new ResponseEntity<>(productForAdd.getId(), HttpStatus.CREATED);
     }
 }

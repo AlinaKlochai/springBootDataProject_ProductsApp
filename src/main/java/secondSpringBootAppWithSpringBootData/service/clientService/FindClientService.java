@@ -3,7 +3,9 @@ package secondSpringBootAppWithSpringBootData.service.clientService;
 import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.dto.clientDto.ClientResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Client;
+import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
+import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ClientConverter;
 
 import java.util.List;
@@ -15,10 +17,12 @@ public class FindClientService {
 
     private final ClientRepository clientRepository;
     private final ClientConverter clientConverter;
+    //private final ProductRepository productRepository;
 
     public FindClientService(ClientRepository clientRepository, ClientConverter clientConverter) {
         this.clientRepository = clientRepository;
         this.clientConverter = clientConverter;
+       // this.productRepository = productRepository;
     }
 
     public List<ClientResponseDto> findAllClients() {
@@ -50,9 +54,8 @@ public class FindClientService {
         }
     }
 
-    public List<ClientResponseDto> findClientsByProductId(Integer productId) {
-        List<Client> clients = clientRepository.findAllByProductsByClientID(productId);
-        return clients.stream().map(clientConverter::clientToDto).collect(Collectors.toList());
-    }
+//    public List<Product> getProductsByClientId(Integer clientId) {
+//        return productRepository.findAllByClientClientId(clientId);
+//    }
 
 }

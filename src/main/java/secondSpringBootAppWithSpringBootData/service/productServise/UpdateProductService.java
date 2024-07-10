@@ -19,8 +19,8 @@ public class UpdateProductService {
     private final ProductConverter productConverter;
 
 
-    public ResponseEntity<ProductResponseDto> updateProduct(Integer id, ProductCreateRequestDto productCreateRequestDto) {
-        Optional<Product> existingProductOpt = productRepository.findById(id);
+    public ResponseEntity<ProductResponseDto> updateProduct(Integer productId, ProductCreateRequestDto productCreateRequestDto) {
+        Optional<Product> existingProductOpt = productRepository.findById(productId);
 
         if (existingProductOpt.isPresent()) {
             Product existingProduct = existingProductOpt.get();

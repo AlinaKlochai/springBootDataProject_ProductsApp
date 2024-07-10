@@ -14,9 +14,9 @@ public class DeleteProductService {
         this.productRepository = productRepository;
     }
 
-    public ResponseEntity<Boolean> deleteProduct(Integer id) {
-        if (productRepository.existsById(id)){
-            productRepository.deleteById(id);
+    public ResponseEntity<Boolean> deleteProduct(Integer productId) {
+        if (productRepository.existsById(productId)){
+            productRepository.deleteById(productId);
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else{
             return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);

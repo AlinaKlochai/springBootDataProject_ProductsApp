@@ -1,5 +1,6 @@
 package secondSpringBootAppWithSpringBootData.controller.clientController;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,9 @@ public class AddClientController {
 
     private final AddClientService addClientService;
 
-    @PostMapping
-    public ResponseEntity<ClientResponseDto> createClient(@RequestBody ClientCreateRequestDto clientCreateRequestDto) {
+    @PostMapping("/addNewClient")
+    public ResponseEntity<Integer> createClient(@Valid @RequestBody ClientCreateRequestDto clientCreateRequestDto) {
         ClientResponseDto createdClient = addClientService.addClient(clientCreateRequestDto);
-        return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdClient.getId(), HttpStatus.CREATED);
     }
 }

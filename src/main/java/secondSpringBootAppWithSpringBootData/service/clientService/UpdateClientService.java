@@ -21,8 +21,8 @@ public class UpdateClientService {
     }
 
 
-    public ClientResponseDto updateClient(Integer id, ClientCreateRequestDto clientCreateRequestDto) {
-        Optional<Client> clientOptional = clientRepository.findById(id);
+    public ClientResponseDto updateClient(Integer clientId, ClientCreateRequestDto clientCreateRequestDto) {
+        Optional<Client> clientOptional = clientRepository.findById(clientId);
         if (clientOptional.isPresent()) {
             Client client = clientOptional.get();
             client.setFirstName(clientCreateRequestDto.getFirstName());
@@ -33,7 +33,7 @@ public class UpdateClientService {
             Client updatedClient = clientRepository.save(client);
             return clientConverter.clientToDto(updatedClient);
         } else {
-            throw new RuntimeException("Client not found with id: " + id);
+            throw new RuntimeException("Client not found with id: " + clientId);
         }
     }
 }

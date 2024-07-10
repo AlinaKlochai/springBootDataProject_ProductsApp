@@ -13,4 +13,6 @@ public class ProductCreateRequestDto {
     private Category category;
     private Double price;
     private Boolean isInStock;
+    private Integer client;
+
 }

@@ -14,7 +14,7 @@ public class ClientConverter {
         clientResponseDto.setLastName(client.getLastName());
         clientResponseDto.setPassword(client.getPassword());
         clientResponseDto.setEmail(client.getEmail());
-        clientResponseDto.setTasks(client.getProducts());
+        clientResponseDto.setProducts(client.getProducts());
         return clientResponseDto;
     }
 }

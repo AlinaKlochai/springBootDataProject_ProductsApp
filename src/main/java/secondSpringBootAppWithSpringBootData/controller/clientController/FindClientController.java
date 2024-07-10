@@ -19,7 +19,7 @@ public class FindClientController {
 
     private final FindClientService findClientService;
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<List<ClientResponseDto>> findAllClients() {
         List<ClientResponseDto> clients = findClientService.findAllClients();
         return new ResponseEntity<>(clients, HttpStatus.OK);
@@ -40,11 +40,5 @@ public class FindClientController {
     public ResponseEntity<ClientResponseDto> findClientByEmail(@PathVariable String email) {
         ClientResponseDto client = findClientService.findClientByEmail(email);
         return new ResponseEntity<>(client, HttpStatus.OK);
-    }
-
-    @GetMapping("/product/{productId}")
-    public ResponseEntity<List<ClientResponseDto>> findClientsByProductId(@PathVariable Integer productId) {
-        List<ClientResponseDto> clients = findClientService.findClientsByProductId(productId);
-        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 }

@@ -1,6 +1,5 @@
 package secondSpringBootAppWithSpringBootData.service.clientService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.dto.clientDto.ClientCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.dto.clientDto.ClientResponseDto;
