@@ -1,6 +1,7 @@
 package secondSpringBootAppWithSpringBootData.controller.productController;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import secondSpringBootAppWithSpringBootData.service.productServise.DeleteProductService;
@@ -13,8 +14,9 @@ public class DeleteProductController {
     private final DeleteProductService deleteProductService;
 
     @DeleteMapping("/deleteProductById/{id}")
-    public ResponseEntity<Boolean> deleteProductById(@PathVariable Integer id) {
-        return deleteProductService.deleteProduct(id);
+    public ResponseEntity<Void> deleteProductById(@PathVariable Integer id) {
+        deleteProductService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

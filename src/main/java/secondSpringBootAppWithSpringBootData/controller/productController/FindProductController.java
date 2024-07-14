@@ -3,11 +3,9 @@ package secondSpringBootAppWithSpringBootData.controller.productController;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
+import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.service.productServise.FindProductService;
 
 import java.util.List;
@@ -36,11 +34,13 @@ public class FindProductController {
         return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
     }
 
+
     @GetMapping("/findByCategory")
     public ResponseEntity<List<ProductResponseDto>> findProductByCategory(@RequestParam String category) {
         ResponseEntity<List<ProductResponseDto>> responseEntity = findProductService.findProductByCategory(category);
         return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
     }
+
 
     @GetMapping("/findByCategoryAndName")
     public ResponseEntity<List<ProductResponseDto>> findProductByCategoryAndName(

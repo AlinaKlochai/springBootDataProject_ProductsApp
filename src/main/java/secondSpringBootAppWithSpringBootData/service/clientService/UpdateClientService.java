@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.dto.clientDto.ClientCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.dto.clientDto.ClientResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Client;
+import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ClientConverter;
 
@@ -33,7 +34,7 @@ public class UpdateClientService {
             Client updatedClient = clientRepository.save(client);
             return clientConverter.clientToDto(updatedClient);
         } else {
-            throw new RuntimeException("Client not found with id: " + clientId);
+            throw new NotFoundException("Client not found with id: " + clientId);
         }
     }
 }

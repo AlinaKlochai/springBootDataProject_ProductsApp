@@ -19,16 +19,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @NotBlank(message = "Product name must be not blank.")
-    @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Product name can contain only latin character and digital.")
     private String name;
 
     @Enumerated(EnumType.STRING)
     private Category category;
-
-    @NotNull(message = "Product price must be not null.")
-    @NotBlank(message = "Product price must be not blank.")
     private Double price;
     private Boolean isInStock;
 

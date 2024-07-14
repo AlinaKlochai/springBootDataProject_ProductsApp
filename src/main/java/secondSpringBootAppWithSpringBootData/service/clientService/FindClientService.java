@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.dto.clientDto.ClientResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Client;
 import secondSpringBootAppWithSpringBootData.entity.Product;
+import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ClientConverter;
@@ -27,7 +28,15 @@ public class FindClientService {
 
     public List<ClientResponseDto> findAllClients() {
         List<Client> clients = clientRepository.findAll();
-        return clients.stream().map(clientConverter::clientToDto).collect(Collectors.toList());
+
+        if (clients.isEmpty()) {
+            throw new NotFoundException("No clients found");
+        }
+
+        return clients.stream()
+                .map(clientConverter::clientToDto)
+                .collect(Collectors.toList());
+
     }
 
 
@@ -36,13 +45,21 @@ public class FindClientService {
         if (clientOptional.isPresent()) {
             return clientConverter.clientToDto(clientOptional.get());
         } else {
-            throw new RuntimeException("Client not found with id: " + id);
+            throw new NotFoundException("Client not found with id: " + id);
         }
     }
 
     public List<ClientResponseDto> findClientsByLastName(String lastName) {
         List<Client> clients = clientRepository.findAllByLastName(lastName);
-        return clients.stream().map(clientConverter::clientToDto).collect(Collectors.toList());
+
+        if (clients.isEmpty()) {
+            throw new NotFoundException("Clients with last name '" + lastName + "' not found");
+        }
+
+        return clients.stream()
+                .map(clientConverter::clientToDto)
+                .collect(Collectors.toList());
+
     }
 
     public ClientResponseDto findClientByEmail(String email) {
@@ -50,7 +67,7 @@ public class FindClientService {
         if (clientOptional.isPresent()) {
             return clientConverter.clientToDto(clientOptional.get());
         } else {
-            throw new RuntimeException("Client not found with email: " + email);
+            throw new NotFoundException("Client not found with email: " + email);
         }
     }
 

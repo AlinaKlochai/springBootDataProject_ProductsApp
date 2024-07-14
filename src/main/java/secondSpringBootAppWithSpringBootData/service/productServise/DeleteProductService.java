@@ -3,6 +3,7 @@ package secondSpringBootAppWithSpringBootData.service.productServise;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 
 @Service
@@ -14,12 +15,11 @@ public class DeleteProductService {
         this.productRepository = productRepository;
     }
 
-    public ResponseEntity<Boolean> deleteProduct(Integer productId) {
-        if (productRepository.existsById(productId)){
-            productRepository.deleteById(productId);
-            return new ResponseEntity<>(true, HttpStatus.OK);
+    public void deleteProduct(Integer id) {
+        if (productRepository.existsById(id)){
+            productRepository.deleteById(id);
         } else{
-            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+            throw new NotFoundException("Product not found with id: " + id);
         }
     }
 }

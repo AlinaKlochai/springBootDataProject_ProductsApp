@@ -1,6 +1,7 @@
 package secondSpringBootAppWithSpringBootData.controller.productController;
 
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class AddProductController {
     private final AddProductService addProductService;
 
     @PostMapping("/addNewProduct")
-    public ResponseEntity<Integer> addNewProduct(@RequestBody ProductCreateRequestDto request){
+    public ResponseEntity<Integer> addNewProduct(@Valid @RequestBody ProductCreateRequestDto request){
         return addProductService.addProduct(request);
     }
 }

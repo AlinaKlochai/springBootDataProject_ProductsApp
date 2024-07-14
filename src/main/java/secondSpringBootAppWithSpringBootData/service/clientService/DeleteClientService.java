@@ -1,7 +1,11 @@
 package secondSpringBootAppWithSpringBootData.service.clientService;
 
 import org.springframework.stereotype.Service;
+import secondSpringBootAppWithSpringBootData.entity.Client;
+import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
+
+import java.util.Optional;
 
 @Service
 public class DeleteClientService {
@@ -14,7 +18,11 @@ public class DeleteClientService {
     }
 
     public void deleteClient(Integer id) {
-        clientRepository.deleteById(id);
+        if (clientRepository.existsById(id)) {
+            clientRepository.deleteById(id);
+        } else {
+            throw new NotFoundException("Client not found with id: " + id);
+        }
     }
 
 }

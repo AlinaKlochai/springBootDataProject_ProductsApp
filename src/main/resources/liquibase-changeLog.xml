@@ -40,7 +40,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="is_in_stock" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="client_id" type="INT">
                 <constraints nullable="false"/>

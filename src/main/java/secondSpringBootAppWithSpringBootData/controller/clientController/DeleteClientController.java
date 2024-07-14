@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import secondSpringBootAppWithSpringBootData.service.clientService.DeleteClientService;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/clients/deleteClient")
 @AllArgsConstructor
 public class DeleteClientController {
 

@@ -25,17 +25,44 @@ public class AddProductService {
         this.clientRepository = clientRepository;
     }
 
+//    public ResponseEntity<Integer> addProduct(ProductCreateRequestDto requestDto) {
+//        Optional<Client> clientOpt = clientRepository.findById(requestDto.getClient());
+//
+//        if (clientOpt.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//
+//        Product productForAdd = productConverter.fromDto(requestDto);
+//        productForAdd.setClient(clientOpt.get());
+//
+//        productRepository.save(productForAdd);
+//        return new ResponseEntity<>(productForAdd.getId(), HttpStatus.CREATED);
+//    }
+
     public ResponseEntity<Integer> addProduct(ProductCreateRequestDto requestDto) {
-        Optional<Client> clientOpt = clientRepository.findById(requestDto.getClient());
+        try {
+            Product productForAdd = productConverter.fromDto(requestDto);
 
-        if (clientOpt.isEmpty()) {
+            // Проверка, указан ли клиент
+            if (requestDto.getClient() != null) {
+                Optional<Client> clientOpt = clientRepository.findById(requestDto.getClient());
+
+                if (clientOpt.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                }
+
+                productForAdd.setClient(clientOpt.get());
+            }
+
+            productRepository.save(productForAdd);
+            return new ResponseEntity<>(productForAdd.getId(), HttpStatus.CREATED);
+
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            // Логирование исключения (рекомендуется использовать логгер)
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        Product productForAdd = productConverter.fromDto(requestDto);
-        productForAdd.setClient(clientOpt.get());
-
-        productRepository.save(productForAdd);
-        return new ResponseEntity<>(productForAdd.getId(), HttpStatus.CREATED);
     }
 }
