@@ -63,7 +63,7 @@ public class FindClientService {
     }
 
     public ClientResponseDto findClientByEmail(String email) {
-        Optional<Client> clientOptional = clientRepository.findAllByEmail(email);
+        Optional<Client> clientOptional = clientRepository.findClintByEmail(email);
         if (clientOptional.isPresent()) {
             return clientConverter.clientToDto(clientOptional.get());
         } else {

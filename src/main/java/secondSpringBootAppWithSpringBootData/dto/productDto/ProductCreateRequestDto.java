@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryDTO;
 import secondSpringBootAppWithSpringBootData.entity.Category;
 
 @Data
@@ -19,7 +20,7 @@ public class ProductCreateRequestDto {
     private String name;
 
     @NotNull(message = "Product category must be not null.")
-    private Category category;
+    private CategoryDTO category;
 
     @NotNull(message = "Product price must be not null.")
     private Double price;

@@ -21,7 +21,8 @@ public class Product {
     private Integer id;
     private String name;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
     private Category category;
     private Double price;
     private Boolean isInStock;
