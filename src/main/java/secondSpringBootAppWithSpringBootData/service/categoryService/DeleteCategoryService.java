@@ -6,10 +6,13 @@ import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.CategoryRepository;
 
 @Service
-@AllArgsConstructor
 public class DeleteCategoryService {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+
+    public DeleteCategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     public void deleteCategory(Integer id) {
         if (categoryRepository.existsById(id)){

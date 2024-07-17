@@ -1,7 +1,5 @@
 package secondSpringBootAppWithSpringBootData.service.productServise;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
