@@ -3,7 +3,7 @@ package secondSpringBootAppWithSpringBootData.dto.productDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import secondSpringBootAppWithSpringBootData.entity.Category;
+import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateRequestDto;
 
 @Data
 @AllArgsConstructor
@@ -11,7 +11,7 @@ import secondSpringBootAppWithSpringBootData.entity.Category;
 public class ProductResponseDto {
 
     private String name;
-    private Category category;
+    private CategoryCreateRequestDto category;
     private Double price;
     private Boolean isInStock;
 

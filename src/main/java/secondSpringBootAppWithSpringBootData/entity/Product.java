@@ -22,7 +22,7 @@ public class Product {
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
     private Double price;
     private Boolean isInStock;

@@ -4,7 +4,7 @@ package secondSpringBootAppWithSpringBootData.service.util;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryDTO;
+import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Category;
@@ -18,7 +18,7 @@ import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
 public class ProductConverter {
 
     private final ClientRepository clientRepository;
-    public final CategoryRepository categoryRepository
+    public final CategoryRepository categoryRepository;
 
 
     public Product fromDto(ProductCreateRequestDto dto){
@@ -57,7 +57,7 @@ public class ProductConverter {
             productResponseDto.setName(product.getName());
         }
         if (product.getCategory() != null) {
-            CategoryDTO categoryDTO = new CategoryDTO(product.getCategory().getName());
+            CategoryCreateRequestDto categoryDTO = new CategoryCreateRequestDto(product.getCategory().getName());
             productResponseDto.setCategory(categoryDTO);
         }
         if(product.getPrice() != null){

@@ -9,6 +9,7 @@ import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Category;
 import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
+import secondSpringBootAppWithSpringBootData.repository.CategoryRepository;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;
 
@@ -22,6 +23,7 @@ public class FindProductService {
 
     private final ProductRepository productRepository;
     private final ProductConverter productConverter;
+    private final CategoryRepository categoryRepository;
 
     public List<ProductResponseDto> findAllProducts() {
         List<Product> products = productRepository.findAll();
@@ -55,15 +57,32 @@ public class FindProductService {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
-    public ResponseEntity<List<ProductResponseDto>> findProductByCategory(String category) {
-        Category cat;
-        try {
-            cat = Category.valueOf(category);
-        } catch (IllegalArgumentException e) {
+    public ResponseEntity<List<ProductResponseDto>> findProductByCategory(String categoryName) {
+//        Category cat;
+//        try {
+//            cat = Category.valueOf(category);
+//        } catch (IllegalArgumentException e) {
+//            throw new NotFoundException("Category not found");
+//        }
+//
+//        List<Product> products = productRepository.findAllByCategory(cat);
+//        if (products.isEmpty()) {
+//            throw new NotFoundException("No products found");
+//        }
+//
+//        List<ProductResponseDto> dtos = products.stream()
+//                .map(productConverter::toDto)
+//                .collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(dtos, HttpStatus.OK);
+
+        Optional<Category> categoryOpt = categoryRepository.findByName(categoryName);
+        if (categoryOpt.isEmpty()) {
             throw new NotFoundException("Category not found");
         }
 
-        List<Product> products = productRepository.findAllByCategory(cat);
+        Category category = categoryOpt.get();
+        List<Product> products = productRepository.findAllByCategory(category);
         if (products.isEmpty()) {
             throw new NotFoundException("No products found");
         }
@@ -75,15 +94,32 @@ public class FindProductService {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
-    public ResponseEntity<List<ProductResponseDto>> findProductByCategoryAndName(String category, String name) {
-        Category categoryName;
-        try {
-            categoryName = Category.valueOf(category);
-        } catch (IllegalArgumentException e) {
+    public ResponseEntity<List<ProductResponseDto>> findProductByCategoryAndName(String categoryName, String name) {
+//        Category categoryName;
+//        try {
+//            categoryName = Category.valueOf(category);
+//        } catch (IllegalArgumentException e) {
+//            throw new NotFoundException("Category not found");
+//        }
+//
+//        List<Product> products = productRepository.findAllByCategoryAndName(categoryName, name);
+//        if (products.isEmpty()) {
+//            throw new NotFoundException("No products found for the specified category and name");
+//        }
+//
+//        List<ProductResponseDto> dtos = products.stream()
+//                .map(productConverter::toDto)
+//                .collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(dtos, HttpStatus.OK);
+
+        Optional<Category> categoryOpt = categoryRepository.findByName(categoryName);
+        if (categoryOpt.isEmpty()) {
             throw new NotFoundException("Category not found");
         }
 
-        List<Product> products = productRepository.findAllByCategoryAndName(categoryName, name);
+        Category category = categoryOpt.get();
+        List<Product> products = productRepository.findAllByCategoryAndName(category, name);
         if (products.isEmpty()) {
             throw new NotFoundException("No products found for the specified category and name");
         }
@@ -94,4 +130,5 @@ public class FindProductService {
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
+
 }

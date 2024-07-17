@@ -25,6 +25,17 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="create.table.category" author="author2">
+        <createTable tableName="category">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <changeSet id="create.table.product" author="author1">
         <createTable tableName="product">
             <column name="id" type="INT" autoIncrement="true">
@@ -33,7 +44,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="category" type="varchar(255)">
+            <column name="category_id" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="price" type="decimal(10,2)">
@@ -52,6 +63,44 @@
                                  constraintName="fk_product_client_id"
                                  referencedTableName="client"
                                  referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="add_fk_to_product" author="author2">
+        <addForeignKeyConstraint
+                baseTableName="product"
+                baseColumnNames="category_id"
+                constraintName="FK_product_category"
+                referencedTableName="category"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="insert.data.category" author="author2">
+        <insert tableName="category">
+            <column name="id" value="1"/>
+            <column name="name" value="Electronics"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="2"/>
+            <column name="name" value="Books"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="3"/>
+            <column name="name" value="Vehicles"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="4"/>
+            <column name="name" value="Suits"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="5"/>
+            <column name="name" value="Equipment"/>
+        </insert>
     </changeSet>
 
     <changeSet id="insert.data.client" author="author1">
@@ -89,19 +138,19 @@
     </changeSet>
 
     <changeSet id="insert.data.product" author="author1">
-    <insert tableName="product">
-        <column name="id" value="1"/>
-        <column name="name" value="Laptop"/>
-        <column name="category" value="ELECTRONICS"/>
-        <column name="price" value="999.99"/>
-        <column name="is_in_stock" value="true"/>
-        <column name="client_id" value="1"/>
-    </insert>
+        <insert tableName="product">
+            <column name="id" value="1"/>
+            <column name="name" value="Laptop"/>
+            <column name="category_id" value="1"/>
+            <column name="price" value="999.99"/>
+            <column name="is_in_stock" value="true"/>
+            <column name="client_id" value="1"/>
+        </insert>
 
         <insert tableName="product">
             <column name="id" value="2"/>
             <column name="name" value="All about Laptop"/>
-            <column name="category" value="BOOKS"/>
+            <column name="category_id" value="2"/>
             <column name="price" value="99"/>
             <column name="is_in_stock" value="true"/>
             <column name="client_id" value="2"/>
@@ -110,7 +159,7 @@
         <insert tableName="product">
             <column name="id" value="3"/>
             <column name="name" value="Phone"/>
-            <column name="category" value="ELECTRONICS"/>
+            <column name="category_id" value="1"/>
             <column name="price" value="800.5"/>
             <column name="is_in_stock" value="true"/>
             <column name="client_id" value="3"/>
