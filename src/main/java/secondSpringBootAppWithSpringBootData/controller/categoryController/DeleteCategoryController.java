@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import secondSpringBootAppWithSpringBootData.service.categoryService.DeleteCategoryService; // Проверьте этот импорт
+import secondSpringBootAppWithSpringBootData.service.categoryService.DeleteCategoryService;
 
 @RestController
 @RequestMapping("/categories/deleteCategory")
 @AllArgsConstructor
 public class DeleteCategoryController {
+
 
     private final DeleteCategoryService deleteCategoryService;
 

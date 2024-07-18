@@ -23,6 +23,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JsonBackReference
     private Category category;
     private Double price;
     private Boolean isInStock;

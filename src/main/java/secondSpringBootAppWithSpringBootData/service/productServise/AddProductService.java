@@ -39,6 +39,7 @@ public class AddProductService {
                 }
 
                 productForAdd.setClient(clientOpt.get());
+                productForAdd.setIsInStock(true);
             }
 
             productRepository.save(productForAdd);
