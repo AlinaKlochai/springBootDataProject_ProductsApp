@@ -73,95 +73,116 @@
                 onUpdate="CASCADE"/>
     </changeSet>
 
+    <changeSet id="create.table.role" author="author2">
+        <createTable tableName="role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints  primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert.data.roles" author="author2">
+        <insert tableName="role">
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role" value="USER"/>
+        </insert>
+    </changeSet>
+
+
     <changeSet id="insert.data.category" author="author2">
         <insert tableName="category">
-            <column name="id" value="1"/>
-            <column name="name" value="Electronics"/>
-        </insert>
+            <!-- <column name="id" value="1"/> -->
+             <column name="name" value="Electronics"/>
+         </insert>
 
-        <insert tableName="category">
-            <column name="id" value="2"/>
-            <column name="name" value="Books"/>
-        </insert>
+         <insert tableName="category">
+             <!--  <column name="id" value="2"/> -->
+               <column name="name" value="Books"/>
+           </insert>
 
-        <insert tableName="category">
-            <column name="id" value="3"/>
-            <column name="name" value="Vehicles"/>
-        </insert>
+           <insert tableName="category">
+               <!-- <column name="id" value="3"/> -->
+               <column name="name" value="Vehicles"/>
+           </insert>
 
-        <insert tableName="category">
-            <column name="id" value="4"/>
-            <column name="name" value="Suits"/>
-        </insert>
+           <insert tableName="category">
+               <!-- <column name="id" value="4"/> -->
+               <column name="name" value="Suits"/>
+           </insert>
 
-        <insert tableName="category">
-            <column name="id" value="5"/>
-            <column name="name" value="Equipment"/>
-        </insert>
+           <insert tableName="category">
+               <!-- <column name="id" value="5"/> -->
+               <column name="name" value="Equipment"/>
+           </insert>
 
-        <insert tableName="category">
-            <column name="id" value="6"/>
-            <column name="name" value="Others"/>
-        </insert>
-    </changeSet>
+           <insert tableName="category">
+               <!--  <column name="id" value="6"/> -->
+               <column name="name" value="Others"/>
+           </insert>
+       </changeSet>
 
-    <changeSet id="insert.data.user" author="author1">
-        <insert tableName="user">
-            <column name="id" value="1"/>
-            <column name="name" value="john"/>
-            <column name="password" value="password123"/>
-            <column name="email" value="john.doe@example.com"/>
-        </insert>
+       <changeSet id="insert.data.user" author="author1">
+           <insert tableName="user">
+               <!-- <column name="id" value="1"/> -->
+               <column name="name" value="john"/>
+               <column name="password" value="password123"/>
+               <column name="email" value="john.doe@example.com"/>
+           </insert>
 
-        <insert tableName="user">
-            <column name="id" value="2"/>
-            <column name="name" value="johnatan"/>
-            <column name="password" value="password843"/>
-            <column name="email" value="john.koll@example.com"/>
-        </insert>
+           <insert tableName="user">
+               <!-- <column name="id" value="2"/> -->
+               <column name="name" value="johnatan"/>
+               <column name="password" value="password843"/>
+               <column name="email" value="john.koll@example.com"/>
+           </insert>
 
-        <insert tableName="user">
-            <column name="id" value="3"/>
-            <column name="name" value="bill"/>
-            <column name="password" value="password793"/>
-            <column name="email" value="bill.koll@example.com"/>
-        </insert>
+           <insert tableName="user">
+               <!-- <column name="id" value="3"/> -->
+               <column name="name" value="bill"/>
+               <column name="password" value="password793"/>
+               <column name="email" value="bill.koll@example.com"/>
+           </insert>
 
-        <insert tableName="user">
-            <column name="id" value="4"/>
-            <column name="name" value="amanda"/>
-            <column name="password" value="password790"/>
-            <column name="email" value="amadoe@example.com"/>
-        </insert>
-    </changeSet>
+           <insert tableName="user">
+               <!-- <column name="id" value="4"/> -->
+               <column name="name" value="amanda"/>
+               <column name="password" value="password790"/>
+               <column name="email" value="amadoe@example.com"/>
+           </insert>
+       </changeSet>
 
-    <changeSet id="insert.data.product" author="author1">
-        <insert tableName="product">
-            <column name="id" value="1"/>
-            <column name="name" value="Laptop"/>
-            <column name="category_id" value="1"/>
-            <column name="price" value="999.99"/>
-            <column name="is_in_stock" value="1"/>
-            <column name="user_id" value="1"/>
-        </insert>
+       <changeSet id="insert.data.product" author="author1">
+           <insert tableName="product">
+               <!--  <column name="id" value="1"/> -->
+               <column name="name" value="Laptop"/>
+               <column name="category_id" value="1"/>
+               <column name="price" value="999.99"/>
+               <column name="is_in_stock" value="1"/>
+               <column name="user_id" value="1"/>
+           </insert>
 
-        <insert tableName="product">
-            <column name="id" value="2"/>
-            <column name="name" value="All about Laptop"/>
-            <column name="category_id" value="2"/>
-            <column name="price" value="99"/>
-            <column name="is_in_stock" value="1"/>
-            <column name="user_id" value="2"/>
-        </insert>
+           <insert tableName="product">
+               <!-- <column name="id" value="2"/> -->
+               <column name="name" value="All about Laptop"/>
+               <column name="category_id" value="2"/>
+               <column name="price" value="99"/>
+               <column name="is_in_stock" value="1"/>
+               <column name="user_id" value="2"/>
+           </insert>
 
-        <insert tableName="product">
-            <column name="id" value="3"/>
-            <column name="name" value="Phone"/>
-            <column name="category_id" value="1"/>
-            <column name="price" value="800.5"/>
-            <column name="is_in_stock" value="1"/>
-            <column name="user_id" value="3"/>
-        </insert>
-    </changeSet>
+           <insert tableName="product">
+               <!-- <column name="id" value="3"/> -->
+               <column name="name" value="Phone"/>
+               <column name="category_id" value="1"/>
+               <column name="price" value="800.5"/>
+               <column name="is_in_stock" value="1"/>
+               <column name="user_id" value="3"/>
+           </insert>
+       </changeSet>
 
-</databaseChangeLog>
+   </databaseChangeLog>
