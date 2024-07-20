@@ -21,7 +21,7 @@ public class AddProductController {
     private final CategoryRepository categoryRepository;
 
     @PostMapping("/addNewProduct")
-    public ResponseEntity<Integer> addNewProduct(@Valid @RequestBody ProductCreateRequestDto request){
+    public ResponseEntity<Long> addNewProduct(@Valid @RequestBody ProductCreateRequestDto request){
         return addProductService.addProduct(request);
     }
 }

@@ -2,9 +2,6 @@ package secondSpringBootAppWithSpringBootData.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +15,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -29,9 +26,9 @@ public class Product {
     private Boolean isInStock;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
-    private Client client;
+    private User user;
 
     public Product(String name, Category category, Double price, Boolean isInStock) {
         this.name = name;

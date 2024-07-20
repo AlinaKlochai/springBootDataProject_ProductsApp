@@ -23,7 +23,7 @@ public class FindProductController {
     }
 
     @GetMapping("/findById")
-    public ResponseEntity<ProductResponseDto> findProductById(@RequestParam Integer id) {
+    public ResponseEntity<ProductResponseDto> findProductById(@RequestParam Long id) {
         ResponseEntity<ProductResponseDto> responseEntity = findProductService.findProductById(id);
         return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
     }
@@ -47,6 +47,12 @@ public class FindProductController {
             @RequestParam String category,
             @RequestParam String name) {
         ResponseEntity<List<ProductResponseDto>> responseEntity = findProductService.findProductByCategoryAndName(category, name);
+        return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
+    }
+
+    @GetMapping("/findAllProductsByUser")
+    public ResponseEntity<List<ProductResponseDto>> findAllProductsByUser(@RequestParam Long userId) {
+        ResponseEntity<List<ProductResponseDto>> responseEntity = findProductService.findAllByUserId(userId);
         return ResponseEntity.status(responseEntity.getStatusCode()).body(responseEntity.getBody());
     }
 }

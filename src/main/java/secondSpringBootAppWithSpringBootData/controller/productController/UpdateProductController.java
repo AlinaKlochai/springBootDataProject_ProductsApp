@@ -16,7 +16,7 @@ public class UpdateProductController {
     private final UpdateProductService updateProductService;
 
     @PutMapping("/updateProductById/{id}")
-    public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable Integer id, @RequestBody ProductCreateRequestDto productCreateRequestDto) {
+    public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable Long id, @RequestBody ProductCreateRequestDto productCreateRequestDto) {
         return updateProductService.updateProduct(id, productCreateRequestDto);
     }
 }

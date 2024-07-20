@@ -24,6 +24,6 @@ public class ProductCreateRequestDto {
     @NotNull(message = "Product price must be not null.")
     private Double price;
     private Boolean isInStock;
-    private Integer client;
+    private Long user;
 
 }

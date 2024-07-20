@@ -8,53 +8,66 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import secondSpringBootAppWithSpringBootData.dto.ValidationErrorDto;
-import secondSpringBootAppWithSpringBootData.dto.ValidationErrorsDto;
+import secondSpringBootAppWithSpringBootData.dto.errorDto.ErrorResponseDto;
+import secondSpringBootAppWithSpringBootData.dto.errorDto.FieldErrorDto;
+import secondSpringBootAppWithSpringBootData.dto.validationErrorDto.ValidationErrorDto;
+import secondSpringBootAppWithSpringBootData.dto.validationErrorDto.ValidationErrorsDto;
 import secondSpringBootAppWithSpringBootData.exception.AlreadyExistException;
 import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handlerNotFoundException(NotFoundException exception){
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorResponseDto> handlerNotFoundException(NotFoundException exception){
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
+                .message(exception.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
 
     @ExceptionHandler(AlreadyExistException.class)
-    public ResponseEntity<String> handlerAlreadyExistException(AlreadyExistException exception){
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorResponseDto> handlerAlreadyExistException(AlreadyExistException exception){
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
+                .message(exception.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
 
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<String> handlerNullPointerException(NullPointerException exception){
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ErrorResponseDto> handlerNullPointerException(NullPointerException exception){
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
+                .message(exception.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     //при валилации данных когда @RequestParam или @PathVariable
     //а также при валидации сущностей, управляемых JPA
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<String> handlerConstraintViolationException(ConstraintViolationException exception){
+    public ResponseEntity<ErrorResponseDto> handlerConstraintViolationException(ConstraintViolationException exception){
+        List<FieldErrorDto> fieldErrors = new ArrayList<>();
 
-        StringBuilder responseMessage = new StringBuilder();
+        exception.getConstraintViolations().forEach(violation -> {
+            FieldErrorDto fieldError = FieldErrorDto.builder()
+                    .field(violation.getPropertyPath().toString())
+                    .message(violation.getMessage())
+                    .rejectedValue(violation.getInvalidValue())
+                    .build();
+            fieldErrors.add(fieldError);
+        });
 
-        exception.getConstraintViolations()
-                .forEach(constraintViolation -> {
-                    String message = constraintViolation.getMessage();
-                    responseMessage.append(message);
-                    responseMessage.append("\n");
-                });
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
+                .message("Validation failed")
+                .fieldErrors(fieldErrors)
+                .build();
 
-
-        return new ResponseEntity<>(responseMessage.toString(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     //при валидации данных с @RequestBody

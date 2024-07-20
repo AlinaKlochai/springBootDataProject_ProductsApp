@@ -8,16 +8,16 @@ import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateReque
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.Category;
-import secondSpringBootAppWithSpringBootData.entity.Client;
+import secondSpringBootAppWithSpringBootData.entity.User;
 import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.repository.CategoryRepository;
-import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
+import secondSpringBootAppWithSpringBootData.repository.UserRepository;
 
 @Service
 @AllArgsConstructor
 public class ProductConverter {
 
-    private final ClientRepository clientRepository;
+    private final UserRepository userRepository;
     public final CategoryRepository categoryRepository;
 
 
@@ -42,10 +42,10 @@ public class ProductConverter {
             product.setIsInStock(dto.getIsInStock());
         }
 
-        if (dto.getClient() != null) {
-            Client client = clientRepository.findById(dto.getClient())
+        if (dto.getUser() != null) {
+            User user = userRepository.findById(Long.valueOf(dto.getUser()))
                     .orElseThrow(() -> new IllegalArgumentException("Client not found"));
-            product.setClient(client);
+            product.setUser(user);
         }
 
         return product;

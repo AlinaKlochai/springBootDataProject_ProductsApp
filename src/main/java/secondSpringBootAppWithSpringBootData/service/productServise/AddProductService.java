@@ -1,12 +1,13 @@
 package secondSpringBootAppWithSpringBootData.service.productServise;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import secondSpringBootAppWithSpringBootData.entity.Client;
+import secondSpringBootAppWithSpringBootData.entity.User;
 import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
-import secondSpringBootAppWithSpringBootData.repository.ClientRepository;
+import secondSpringBootAppWithSpringBootData.repository.UserRepository;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;
 
@@ -14,31 +15,25 @@ import java.util.Optional;
 
 
 @Service
+@AllArgsConstructor
 public class AddProductService {
     private final ProductRepository productRepository;
     private final ProductConverter productConverter;
-    private final ClientRepository clientRepository;
+    private final UserRepository userRepository;
 
-    public AddProductService(ProductRepository productRepository, ProductConverter productConverter, ClientRepository clientRepository) {
-        this.productRepository = productRepository;
-        this.productConverter = productConverter;
-        this.clientRepository = clientRepository;
-    }
-
-
-    public ResponseEntity<Integer> addProduct(ProductCreateRequestDto requestDto) {
+    public ResponseEntity<Long> addProduct(ProductCreateRequestDto requestDto) {
         try {
             Product productForAdd = productConverter.fromDto(requestDto);
 
             // Проверка, указан ли клиент
-            if (requestDto.getClient() != null) {
-                Optional<Client> clientOpt = clientRepository.findById(requestDto.getClient());
+            if (requestDto.getUser() != null) {
+                Optional<User> userOpt = userRepository.findById(Long.valueOf(requestDto.getUser()));
 
-                if (clientOpt.isEmpty()) {
+                if (userOpt.isEmpty()) {
                     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                 }
 
-                productForAdd.setClient(clientOpt.get());
+                productForAdd.setUser(userOpt.get());
                 productForAdd.setIsInStock(true);
             }
 

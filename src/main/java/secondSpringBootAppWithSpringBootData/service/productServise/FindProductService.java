@@ -36,7 +36,7 @@ public class FindProductService {
                .toList();
     }
 
-    public ResponseEntity<ProductResponseDto> findProductById(int productId) {
+    public ResponseEntity<ProductResponseDto> findProductById(Long productId) {
 
         return productRepository.findById(productId)
                 .map(productConverter::toDto)
@@ -58,25 +58,8 @@ public class FindProductService {
     }
 
     public ResponseEntity<List<ProductResponseDto>> findProductByCategory(String categoryName) {
-//        Category cat;
-//        try {
-//            cat = Category.valueOf(category);
-//        } catch (IllegalArgumentException e) {
-//            throw new NotFoundException("Category not found");
-//        }
-//
-//        List<Product> products = productRepository.findAllByCategory(cat);
-//        if (products.isEmpty()) {
-//            throw new NotFoundException("No products found");
-//        }
-//
-//        List<ProductResponseDto> dtos = products.stream()
-//                .map(productConverter::toDto)
-//                .collect(Collectors.toList());
-//
-//        return new ResponseEntity<>(dtos, HttpStatus.OK);
-
         Optional<Category> categoryOpt = categoryRepository.findByName(categoryName);
+
         if (categoryOpt.isEmpty()) {
             throw new NotFoundException("Category not found");
         }
@@ -95,24 +78,6 @@ public class FindProductService {
     }
 
     public ResponseEntity<List<ProductResponseDto>> findProductByCategoryAndName(String categoryName, String name) {
-//        Category categoryName;
-//        try {
-//            categoryName = Category.valueOf(category);
-//        } catch (IllegalArgumentException e) {
-//            throw new NotFoundException("Category not found");
-//        }
-//
-//        List<Product> products = productRepository.findAllByCategoryAndName(categoryName, name);
-//        if (products.isEmpty()) {
-//            throw new NotFoundException("No products found for the specified category and name");
-//        }
-//
-//        List<ProductResponseDto> dtos = products.stream()
-//                .map(productConverter::toDto)
-//                .collect(Collectors.toList());
-//
-//        return new ResponseEntity<>(dtos, HttpStatus.OK);
-
         Optional<Category> categoryOpt = categoryRepository.findByName(categoryName);
         if (categoryOpt.isEmpty()) {
             throw new NotFoundException("Category not found");
@@ -129,6 +94,16 @@ public class FindProductService {
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<ProductResponseDto>> findAllByUserId(Long userId){
+        List<ProductResponseDto> allProductsByUser = productRepository.findAllByUserId(userId).stream()
+                .map(productConverter::toDto)
+                .toList();
+        if (allProductsByUser.isEmpty()) {
+            throw new NotFoundException("No products found by userId: " + userId);
+        }
+        return ResponseEntity.ok(allProductsByUser);
     }
 
 }

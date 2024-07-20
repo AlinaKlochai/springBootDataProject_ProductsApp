@@ -1,4 +1,4 @@
-package secondSpringBootAppWithSpringBootData.controller.clientController;
+package secondSpringBootAppWithSpringBootData.controller.userController;
 
 
 import lombok.AllArgsConstructor;
@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import secondSpringBootAppWithSpringBootData.service.clientService.DeleteClientService;
+import secondSpringBootAppWithSpringBootData.service.userService.DeleteUserService;
 
 @RestController
-@RequestMapping("/clients/deleteClient")
+@RequestMapping("/users/deleteUser")
 @AllArgsConstructor
-public class DeleteClientController {
+public class DeleteUserController {
 
-    private final DeleteClientService deleteClientService;
+    private final DeleteUserService deleteUserService;
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
-        deleteClientService.deleteClient(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        deleteUserService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

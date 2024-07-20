@@ -1,4 +1,4 @@
-package secondSpringBootAppWithSpringBootData.dto;
+package secondSpringBootAppWithSpringBootData.dto.validationErrorDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -14,7 +14,7 @@ public class DeleteCategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public void deleteCategory(Integer id) {
+    public void deleteCategory(Long id) {
         if (categoryRepository.existsById(id)){
             categoryRepository.deleteById(id);
         } else{

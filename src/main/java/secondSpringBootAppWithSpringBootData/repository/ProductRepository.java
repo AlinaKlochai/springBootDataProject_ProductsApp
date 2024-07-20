@@ -8,15 +8,14 @@ import secondSpringBootAppWithSpringBootData.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByName(String name);
     List<Product> findAllByCategory(Category category);
-
-    List<Product> findAllByClientId(Integer clientId);
+    List<Product> findAllByUserId(Long userId);
 
     //   @Query("SELECT p FROM Product p WHERE p.category =: category AND p.name =:name")
-    //List<Product> findAllByCategoryAndName(@Param("category") Category category,@Param("name") String name);
     List<Product> findAllByCategoryAndName(Category category, String name);
 }

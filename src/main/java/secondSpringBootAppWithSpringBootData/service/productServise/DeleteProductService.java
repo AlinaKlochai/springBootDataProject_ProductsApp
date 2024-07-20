@@ -13,7 +13,7 @@ public class DeleteProductService {
         this.productRepository = productRepository;
     }
 
-    public void deleteProduct(Integer id) {
+    public void deleteProduct(Long id) {
         if (productRepository.existsById(id)){
             productRepository.deleteById(id);
         } else{

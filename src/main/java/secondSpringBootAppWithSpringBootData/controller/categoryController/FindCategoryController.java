@@ -20,6 +20,6 @@ public class FindCategoryController {
     @GetMapping("/findAll")
     public ResponseEntity<List<CategoryResponseDto>> findAll() {
         List<CategoryResponseDto> allCategories = findCategoryService.findAll();
-        return
+        return ResponseEntity.ok(allCategories);
     }
 }
