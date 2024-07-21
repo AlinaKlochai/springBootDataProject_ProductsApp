@@ -1,5 +1,6 @@
 package secondSpringBootAppWithSpringBootData.service.userService;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.dto.userDto.UserResponseDto;
 import secondSpringBootAppWithSpringBootData.entity.User;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class FindUserService {
 
     private final UserRepository userRepository;
@@ -19,10 +21,7 @@ public class FindUserService {
     //private final ProductRepository productRepository;
 
 
-    public FindUserService(UserRepository userRepository, UserConverter userConverter) {
-        this.userRepository = userRepository;
-        this.userConverter = userConverter;
-    }
+
 
     public List<UserResponseDto> findAllUsers() {
         List<User> users = userRepository.findAll();
