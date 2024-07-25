@@ -12,7 +12,7 @@ import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryResponseDto
 import secondSpringBootAppWithSpringBootData.service.categoryService.AddCategoryService;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/rent/categories")
 @AllArgsConstructor
 public class AddCategoryController {
 

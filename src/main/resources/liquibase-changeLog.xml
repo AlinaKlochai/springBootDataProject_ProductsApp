@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
+    <!-- Создание таблицы user -->
     <changeSet id="create.table.user" author="author1">
         <createTable tableName="user">
             <column name="id" type="bigint" autoIncrement="true">
@@ -22,6 +23,7 @@
         </createTable>
     </changeSet>
 
+    <!-- Создание таблицы category -->
     <changeSet id="create.table.category" author="author2">
         <createTable tableName="category">
             <column name="id" type="bigint" autoIncrement="true">
@@ -33,6 +35,7 @@
         </createTable>
     </changeSet>
 
+    <!-- Создание таблицы product -->
     <changeSet id="create.table.product" author="author1">
         <createTable tableName="product">
             <column name="id" type="bigint" autoIncrement="true">
@@ -54,7 +57,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
         <addForeignKeyConstraint baseTableName="product"
                                  baseColumnNames="user_id"
                                  constraintName="fk_product_user_id"
@@ -62,6 +64,7 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
+    <!-- Добавление внешнего ключа для категории в таблице product -->
     <changeSet id="add_fk_to_product" author="author2">
         <addForeignKeyConstraint
                 baseTableName="product"
@@ -73,10 +76,11 @@
                 onUpdate="CASCADE"/>
     </changeSet>
 
+    <!-- Создание таблицы role -->
     <changeSet id="create.table.role" author="author2">
         <createTable tableName="role">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints  primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="role" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -84,6 +88,7 @@
         </createTable>
     </changeSet>
 
+    <!-- Вставка начальных данных в таблицу role -->
     <changeSet id="insert.data.roles" author="author2">
         <insert tableName="role">
             <column name="role" value="ADMIN"/>
@@ -93,96 +98,201 @@
         </insert>
     </changeSet>
 
-
+    <!-- Вставка начальных данных в таблицу category -->
     <changeSet id="insert.data.category" author="author2">
         <insert tableName="category">
             <!-- <column name="id" value="1"/> -->
-             <column name="name" value="Electronics"/>
-         </insert>
+            <column name="name" value="Electronics"/>
+        </insert>
+        <insert tableName="category">
+            <!-- <column name="id" value="2"/> -->
+            <column name="name" value="Books"/>
+        </insert>
+        <insert tableName="category">
+            <!-- <column name="id" value="3"/> -->
+            <column name="name" value="Vehicles"/>
+        </insert>
+        <insert tableName="category">
+            <!-- <column name="id" value="4"/> -->
+            <column name="name" value="Suits"/>
+        </insert>
+        <insert tableName="category">
+            <!-- <column name="id" value="5"/> -->
+            <column name="name" value="Equipment"/>
+        </insert>
+        <insert tableName="category">
+            <!-- <column name="id" value="6"/> -->
+            <column name="name" value="Others"/>
+        </insert>
+    </changeSet>
 
-         <insert tableName="category">
-             <!--  <column name="id" value="2"/> -->
-               <column name="name" value="Books"/>
-           </insert>
+    <!-- Вставка начальных данных в таблицу user -->
+    <changeSet id="insert.data.user" author="author1">
+        <insert tableName="user">
+            <!-- <column name="id" value="1"/> -->
+            <column name="name" value="john"/>
+            <column name="password" value="password123"/>
+            <column name="email" value="john.doe@example.com"/>
+        </insert>
+        <insert tableName="user">
+            <!-- <column name="id" value="2"/> -->
+            <column name="name" value="johnatan"/>
+            <column name="password" value="password843"/>
+            <column name="email" value="john.koll@example.com"/>
+        </insert>
+        <insert tableName="user">
+            <!-- <column name="id" value="3"/> -->
+            <column name="name" value="bill"/>
+            <column name="password" value="password793"/>
+            <column name="email" value="bill.koll@example.com"/>
+        </insert>
+        <insert tableName="user">
+            <!-- <column name="id" value="4"/> -->
+            <column name="name" value="amanda"/>
+            <column name="password" value="password790"/>
+            <column name="email" value="amadoe@example.com"/>
+        </insert>
+    </changeSet>
 
-           <insert tableName="category">
-               <!-- <column name="id" value="3"/> -->
-               <column name="name" value="Vehicles"/>
-           </insert>
+    <!-- Вставка начальных данных в таблицу product -->
+    <changeSet id="insert.data.product" author="author1">
+        <insert tableName="product">
+            <!-- <column name="id" value="1"/> -->
+            <column name="name" value="Laptop"/>
+            <column name="category_id" value="1"/>
+            <column name="price" value="999.99"/>
+            <column name="is_in_stock" value="1"/>
+            <column name="user_id" value="1"/>
+        </insert>
+        <insert tableName="product">
+            <!-- <column name="id" value="2"/> -->
+            <column name="name" value="All about Laptop"/>
+            <column name="category_id" value="2"/>
+            <column name="price" value="99"/>
+            <column name="is_in_stock" value="1"/>
+            <column name="user_id" value="2"/>
+        </insert>
+        <insert tableName="product">
+            <!-- <column name="id" value="3"/> -->
+            <column name="name" value="Phone"/>
+            <column name="category_id" value="1"/>
+            <column name="price" value="800.5"/>
+            <column name="is_in_stock" value="1"/>
+            <column name="user_id" value="3"/>
+        </insert>
+    </changeSet>
 
-           <insert tableName="category">
-               <!-- <column name="id" value="4"/> -->
-               <column name="name" value="Suits"/>
-           </insert>
+    <!-- Создание таблицы region -->
+    <changeSet id="create.table.region" author="EkaterinaB">
+        <createTable tableName="region">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="region_news_id" type="INTEGER">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="region_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
-           <insert tableName="category">
-               <!-- <column name="id" value="5"/> -->
-               <column name="name" value="Equipment"/>
-           </insert>
+    <!-- Вставка начальных данных в таблицу region -->
+    <changeSet id="insert-initial-data-region" author="EkaterinaB">
+        <insert tableName="region">
+            <column name="region_news_id" value="0"/>
+            <column name="region_name" value="non-region"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="1"/>
+            <column name="region_name" value="Baden-Württemberg"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="2"/>
+            <column name="region_name" value="Bayern"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="3"/>
+            <column name="region_name" value="Berlin"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="4"/>
+            <column name="region_name" value="Brandenburg"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="5"/>
+            <column name="region_name" value="Bremen"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="6"/>
+            <column name="region_name" value="Hamburg"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="7"/>
+            <column name="region_name" value="Hessen"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="8"/>
+            <column name="region_name" value="Mecklenburg-Vorpommern"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="9"/>
+            <column name="region_name" value="Niedersachsen"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="10"/>
+            <column name="region_name" value="Nordrhein-Westfalen"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="11"/>
+            <column name="region_name" value="Rheinland-Pfalz"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="12"/>
+            <column name="region_name" value="Saarland"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="13"/>
+            <column name="region_name" value="Sachsen"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="14"/>
+            <column name="region_name" value="Sachsen-Anhalt"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="15"/>
+            <column name="region_name" value="Schleswig-Holstein"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="16"/>
+            <column name="region_name" value="Thüringen"/>
+        </insert>
+        <insert tableName="region">
+            <column name="region_news_id" value="17"/>
+            <column name="region_name" value="Deutschland"/>
+        </insert>
+    </changeSet>
 
-           <insert tableName="category">
-               <!--  <column name="id" value="6"/> -->
-               <column name="name" value="Others"/>
-           </insert>
-       </changeSet>
+    <!-- Добавление столбца region_id в таблицу product -->
+    <changeSet id="add_region_id_column" author="your_name">
+        <addColumn tableName="product">
+            <column name="region_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
 
-       <changeSet id="insert.data.user" author="author1">
-           <insert tableName="user">
-               <!-- <column name="id" value="1"/> -->
-               <column name="name" value="john"/>
-               <column name="password" value="password123"/>
-               <column name="email" value="john.doe@example.com"/>
-           </insert>
+    <!-- Изменение типа данных столбца region_id и удаление ограничения NOT NULL -->
+    <changeSet id="modify_region_id_column" author="ak">
+        <modifyDataType tableName="product" columnName="region_id" newDataType="bigint"/>
+        <dropNotNullConstraint tableName="product" columnName="region_id" columnDataType="bigint"/>
+    </changeSet>
 
-           <insert tableName="user">
-               <!-- <column name="id" value="2"/> -->
-               <column name="name" value="johnatan"/>
-               <column name="password" value="password843"/>
-               <column name="email" value="john.koll@example.com"/>
-           </insert>
+    <!-- Добавление нового столбца description в таблицу product -->
+    <changeSet id="add_description_column" author="ak">
+        <addColumn tableName="product">
+            <column name="description" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 
-           <insert tableName="user">
-               <!-- <column name="id" value="3"/> -->
-               <column name="name" value="bill"/>
-               <column name="password" value="password793"/>
-               <column name="email" value="bill.koll@example.com"/>
-           </insert>
-
-           <insert tableName="user">
-               <!-- <column name="id" value="4"/> -->
-               <column name="name" value="amanda"/>
-               <column name="password" value="password790"/>
-               <column name="email" value="amadoe@example.com"/>
-           </insert>
-       </changeSet>
-
-       <changeSet id="insert.data.product" author="author1">
-           <insert tableName="product">
-               <!--  <column name="id" value="1"/> -->
-               <column name="name" value="Laptop"/>
-               <column name="category_id" value="1"/>
-               <column name="price" value="999.99"/>
-               <column name="is_in_stock" value="1"/>
-               <column name="user_id" value="1"/>
-           </insert>
-
-           <insert tableName="product">
-               <!-- <column name="id" value="2"/> -->
-               <column name="name" value="All about Laptop"/>
-               <column name="category_id" value="2"/>
-               <column name="price" value="99"/>
-               <column name="is_in_stock" value="1"/>
-               <column name="user_id" value="2"/>
-           </insert>
-
-           <insert tableName="product">
-               <!-- <column name="id" value="3"/> -->
-               <column name="name" value="Phone"/>
-               <column name="category_id" value="1"/>
-               <column name="price" value="800.5"/>
-               <column name="is_in_stock" value="1"/>
-               <column name="user_id" value="3"/>
-           </insert>
-       </changeSet>
-
-   </databaseChangeLog>
+</databaseChangeLog>

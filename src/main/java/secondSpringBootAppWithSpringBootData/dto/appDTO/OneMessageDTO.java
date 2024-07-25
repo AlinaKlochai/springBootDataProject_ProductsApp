@@ -1,4 +1,4 @@
-package secondSpringBootAppWithSpringBootData.dto;
+package secondSpringBootAppWithSpringBootData.dto.appDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -7,7 +7,9 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import secondSpringBootAppWithSpringBootData.dto.RegionDto;
 import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateRequestDto;
+import secondSpringBootAppWithSpringBootData.entity.Region;
 
 @Data
 @AllArgsConstructor
@@ -23,7 +25,12 @@ public class ProductCreateRequestDto {
 
     @NotNull(message = "Product price must be not null.")
     private Double price;
+
+    private String description;
     private Boolean isInStock;
+
+    @NotNull(message = "Region by product must be not null.")
+    private RegionDto region;
     private Long user;
 
 }
