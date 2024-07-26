@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import secondSpringBootAppWithSpringBootData.dto.RegionDto;
 import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateRequestDto;
-import secondSpringBootAppWithSpringBootData.entity.Region;
+import secondSpringBootAppWithSpringBootData.dto.userDto.UserJustWithNameDto;
 
 @Data
 @AllArgsConstructor
@@ -18,5 +18,6 @@ public class ProductResponseDto {
     private String description;
     private RegionDto region;
     private Boolean isInStock;
+    private UserJustWithNameDto owner;
 
 }

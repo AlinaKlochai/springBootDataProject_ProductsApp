@@ -11,7 +11,7 @@ import secondSpringBootAppWithSpringBootData.service.categoryService.FindCategor
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/rents/categories")
 @AllArgsConstructor
 public class FindCategoryController {
 

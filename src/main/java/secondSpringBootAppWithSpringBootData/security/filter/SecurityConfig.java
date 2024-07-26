@@ -39,8 +39,11 @@ public class SecurityConfig {
 //                        .requestMatchers("/api/auth/**").permitAll()
 //                        .requestMatchers("/api/user/registration/**").permitAll()
 //                        .requestMatchers("/api/public/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/users/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                       // .requestMatchers("/api/users/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/blog/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/api/rent/**").hasAnyRole("USER","ADMIN")
+                       // .requestMatchers("/user/**").permitAll()
                         .anyRequest().permitAll())
 
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

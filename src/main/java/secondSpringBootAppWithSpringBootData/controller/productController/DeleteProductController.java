@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import secondSpringBootAppWithSpringBootData.controller.api.product.DeleteProductControllerApi;
+import secondSpringBootAppWithSpringBootData.dto.appDTO.OneMessageDTO;
 import secondSpringBootAppWithSpringBootData.service.productServise.DeleteProductService;
+import secondSpringBootAppWithSpringBootData.service.user.UserFindService;
 
 @RestController
 @AllArgsConstructor
@@ -16,12 +18,13 @@ import secondSpringBootAppWithSpringBootData.service.productServise.DeleteProduc
 public class DeleteProductController implements DeleteProductControllerApi {
 
     private final DeleteProductService deleteProductService;
+    private final UserFindService userFindService;
 
 
-    @DeleteMapping("/deleteProductById/{id}")
-    public ResponseEntity<Void> deleteProductById(@PathVariable Long id) {
-        deleteProductService.deleteProduct(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<OneMessageDTO> deleteProductById(@PathVariable Long id) {
+        System.out.println("Received request to delete product with id: " + id);
+        return deleteProductService.deleteProduct(id);
     }
 
 

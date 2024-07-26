@@ -8,6 +8,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import secondSpringBootAppWithSpringBootData.dto.appDTO.OneMessageDTO;
 import secondSpringBootAppWithSpringBootData.dto.errorDto.ErrorResponseDto;
 import secondSpringBootAppWithSpringBootData.dto.errorDto.FieldErrorDto;
 import secondSpringBootAppWithSpringBootData.dto.validationErrorDto.ValidationErrorDto;
@@ -28,7 +29,6 @@ public class GlobalExceptionHandler {
                 .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
-
 
     @ExceptionHandler(AlreadyExistException.class)
     public ResponseEntity<ErrorResponseDto> handlerAlreadyExistException(AlreadyExistException exception){

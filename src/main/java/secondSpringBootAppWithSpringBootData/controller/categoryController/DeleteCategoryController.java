@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import secondSpringBootAppWithSpringBootData.service.categoryService.DeleteCategoryService;
 
 @RestController
-@RequestMapping("api/rent/categories/deleteCategory")
+@RequestMapping("api/rent/categories")
 @AllArgsConstructor
 public class DeleteCategoryController {
 

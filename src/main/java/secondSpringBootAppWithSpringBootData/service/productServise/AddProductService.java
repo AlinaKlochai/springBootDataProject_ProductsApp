@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import secondSpringBootAppWithSpringBootData.dto.appDTO.OneMessageDTO;
 import secondSpringBootAppWithSpringBootData.dto.validationErrorDto.ValidationErrorDto;
 import secondSpringBootAppWithSpringBootData.dto.validationErrorDto.ValidationErrorsDto;
+import secondSpringBootAppWithSpringBootData.entity.Category;
 import secondSpringBootAppWithSpringBootData.entity.Region;
 import secondSpringBootAppWithSpringBootData.entity.User;
 import secondSpringBootAppWithSpringBootData.entity.Product;
@@ -16,6 +17,7 @@ import secondSpringBootAppWithSpringBootData.repository.CategoryRepository;
 import secondSpringBootAppWithSpringBootData.repository.RegionRepository;
 import secondSpringBootAppWithSpringBootData.repository.UserRepository;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
+import secondSpringBootAppWithSpringBootData.service.user.UserFindService;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;
 
 import java.util.ArrayList;
@@ -29,17 +31,18 @@ public class AddProductService {
     private final ProductConverter productConverter;
     private final UserRepository userRepository;
     private final RegionRepository regionRepository;
+    private final UserFindService userFindService;
 
     public ResponseEntity<?> addProduct(ProductCreateRequestDto requestDto) {
+
         List<ValidationErrorDto> errors = new ArrayList<>();
 
-        // Валидация user
-        if (requestDto.getUser() == null) {
-            errors.add(new ValidationErrorDto("user", "User not found"));
+        // Валидация category
+        if (requestDto.getCategory() == null) {
+            errors.add(new ValidationErrorDto("category", "Category not found"));
         } else {
-            userRepository.findById(requestDto.getUser()).orElse(null);
-            if (!userRepository.existsById(requestDto.getUser())) {
-                errors.add(new ValidationErrorDto("user", "User with id " + requestDto.getUser() + " not found."));
+            if (!categoryRepository.findByName(requestDto.getCategory().getName()).isPresent()) {
+                errors.add(new ValidationErrorDto("category", "Category with name " + requestDto.getCategory().getName() + " not found."));
             }
         }
 
@@ -52,33 +55,21 @@ public class AddProductService {
             }
         }
 
-        if (requestDto.getCategory() == null) {
-            errors.add(new ValidationErrorDto("category", "Category not found"));
-        } else {
-            if (!categoryRepository.findByName(requestDto.getCategory().getName()).isPresent()) {
-                errors.add(new ValidationErrorDto("category", "Category with name " + requestDto.getCategory().getName() + " not found."));
-            }
-        }
-
         if (!errors.isEmpty()) {
             return new ResponseEntity<>(new ValidationErrorsDto(errors), HttpStatus.BAD_REQUEST);
         }
 
         try {
-
             Product productForAdd = productConverter.fromDto(requestDto);
 
             productForAdd.setIsInStock(requestDto.getIsInStock() != null ? requestDto.getIsInStock() : true);
 
-            if (requestDto.getUser() != null) {
-                User user = userRepository.findById(requestDto.getUser()).orElseThrow();
-                productForAdd.setUser(user);
-            }
+            // Получаем пользователя из контекста безопасности
+            User user = userFindService.getUserFromContext();
+            productForAdd.setUser(user);
 
-            if (requestDto.getRegion() != null) {
-                Region region = regionRepository.findByRegionName(requestDto.getRegion().getRegionName()).orElseThrow();
-                productForAdd.setRegion(region);
-            }
+            Region region = regionRepository.findByRegionName(requestDto.getRegion().getRegionName()).orElseThrow();
+            productForAdd.setRegion(region);
 
             productForAdd.setDescription(requestDto.getDescription());
 
@@ -94,5 +85,4 @@ public class AddProductService {
             return new ResponseEntity<>(new OneMessageDTO("An unexpected error occurred. Please try again later."), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

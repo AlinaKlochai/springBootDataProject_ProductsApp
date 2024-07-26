@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import secondSpringBootAppWithSpringBootData.dto.appDTO.OneMessageDTO;
 
 @RestController
 @RequestMapping("/rent")
@@ -20,5 +21,5 @@ public interface DeleteProductControllerApi {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> deleteProductById(@PathVariable Long id);
+    ResponseEntity<OneMessageDTO> deleteProductById(@PathVariable Long id);
 }

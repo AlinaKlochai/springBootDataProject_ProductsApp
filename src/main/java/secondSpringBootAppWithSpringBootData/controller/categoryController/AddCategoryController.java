@@ -18,7 +18,7 @@ public class AddCategoryController {
 
   private final AddCategoryService addCategoryService;
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<CategoryResponseDto> addCategory(@Valid @RequestBody CategoryCreateRequestDto requestDto) {
         CategoryResponseDto responseDto = addCategoryService.addCategory(requestDto.getName());
         return ResponseEntity.ok(responseDto);
