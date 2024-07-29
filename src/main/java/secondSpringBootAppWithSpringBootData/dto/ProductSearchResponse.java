@@ -12,4 +12,6 @@ import java.util.List;
 public class ProductSearchResponse {
     private List<ProductResponseDto> products;
     private ErrorResponseDto error;
+    private long totalElements;
+    private int totalPages;
 }

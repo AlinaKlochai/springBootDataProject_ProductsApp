@@ -17,7 +17,6 @@ public class UpdateProductController implements UpdateProductControllerApi {
 
     private final UpdateProductService updateProductService;
 
-    @Override
     @PutMapping("{id}")
     public ResponseEntity<OneMessageDTO> updateProduct(
             @PathVariable Long id,

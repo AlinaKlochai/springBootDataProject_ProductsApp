@@ -29,7 +29,7 @@ public class DeleteProductService {
             productRepository.deleteById(id);
             return new ResponseEntity<>(new OneMessageDTO("Product deleted successfully"), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new OneMessageDTO("You do not have permission to delete this product"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new OneMessageDTO("You do not have permission to delete this product"), HttpStatus.CONFLICT);
         }
     }
 }

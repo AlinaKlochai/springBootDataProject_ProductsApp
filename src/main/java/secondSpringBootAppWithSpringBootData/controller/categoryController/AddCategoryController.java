@@ -7,21 +7,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import secondSpringBootAppWithSpringBootData.controller.api.category.AddCategoryControllerApi;
 import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryResponseDto;
 import secondSpringBootAppWithSpringBootData.service.categoryService.AddCategoryService;
 
 @RestController
-@RequestMapping("/api/rent/categories")
+@RequestMapping("/admin/rent/categories")
 @AllArgsConstructor
-public class AddCategoryController {
+public class AddCategoryController implements AddCategoryControllerApi {
 
   private final AddCategoryService addCategoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryResponseDto> addCategory(@Valid @RequestBody CategoryCreateRequestDto requestDto) {
-        CategoryResponseDto responseDto = addCategoryService.addCategory(requestDto.getName());
-        return ResponseEntity.ok(responseDto);
+    public ResponseEntity<?> addCategory(@Valid @RequestBody CategoryCreateRequestDto requestDto) {
+        return addCategoryService.addCategory(requestDto.getName());
     }
-
 }

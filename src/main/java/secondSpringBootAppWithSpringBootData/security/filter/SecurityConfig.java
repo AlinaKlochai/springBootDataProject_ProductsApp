@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -39,11 +40,11 @@ public class SecurityConfig {
 //                        .requestMatchers("/api/auth/**").permitAll()
 //                        .requestMatchers("/api/user/registration/**").permitAll()
 //                        .requestMatchers("/api/public/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                       // .requestMatchers("/api/users/**").hasAnyRole("USER","ADMIN")
+                       // .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/blog/**").hasAnyRole("USER","ADMIN")
+                        // в проекте просто rent
                         .requestMatchers("/api/rent/**").hasAnyRole("USER","ADMIN")
-                       // .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll())
 
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

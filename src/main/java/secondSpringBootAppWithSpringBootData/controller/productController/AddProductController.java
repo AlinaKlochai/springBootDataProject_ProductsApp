@@ -20,7 +20,6 @@ import secondSpringBootAppWithSpringBootData.service.productServise.AddProductSe
 public class AddProductController implements AddProductControllerApi {
 
     private final AddProductService addProductService;
-    private final CategoryRepository categoryRepository;
 
     @PostMapping
     public ResponseEntity<?> addNewProduct(@Valid @RequestBody ProductCreateRequestDto request) {

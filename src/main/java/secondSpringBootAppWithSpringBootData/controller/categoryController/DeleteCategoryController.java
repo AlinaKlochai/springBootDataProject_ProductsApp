@@ -7,18 +7,19 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import secondSpringBootAppWithSpringBootData.controller.api.category.DeleteCategoryControllerApi;
 import secondSpringBootAppWithSpringBootData.service.categoryService.DeleteCategoryService;
 
 @RestController
-@RequestMapping("api/rent/categories")
+@RequestMapping("admin/rent/categories")
 @AllArgsConstructor
-public class DeleteCategoryController {
+public class DeleteCategoryController implements DeleteCategoryControllerApi {
 
 
     private final DeleteCategoryService deleteCategoryService;
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
         deleteCategoryService.deleteCategory(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

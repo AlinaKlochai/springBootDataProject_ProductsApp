@@ -36,9 +36,8 @@ public class UpdateProductService {
             Product existingProduct = existingProductOpt.get();
             User currentUser = userFindService.getUserFromContext();
 
-            // Проверка, что текущий пользователь является владельцем продукта
             if (!existingProduct.getUser().getId().equals(currentUser.getId())) {
-                return new ResponseEntity<>(new OneMessageDTO("You do not have the rights to update this product."), HttpStatus.FORBIDDEN); // У пользователя нет прав на обновление этого продукта
+                return new ResponseEntity<>(new OneMessageDTO("You do not have the rights to update this product."), HttpStatus.CONFLICT); // У пользователя нет прав на обновление этого продукта
             }
 
             if (productCreateRequestDto.getName() != null) {

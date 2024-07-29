@@ -18,8 +18,6 @@ import secondSpringBootAppWithSpringBootData.service.user.UserFindService;
 public class DeleteProductController implements DeleteProductControllerApi {
 
     private final DeleteProductService deleteProductService;
-    private final UserFindService userFindService;
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<OneMessageDTO> deleteProductById(@PathVariable Long id) {

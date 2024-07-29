@@ -45,4 +45,8 @@ public class FindRegionService {
             throw new RuntimeException();
         }
     }
+
+    public Optional<Region> findRegionByNameOptional(String name) {
+        return regionRepository.findByRegionName(name); // Предполагая, что метод findByNameIgnoreCase реализован в RegionRepository
+    }
 }

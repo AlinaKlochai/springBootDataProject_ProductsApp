@@ -20,9 +20,9 @@ public class Category {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Product> products;
+   // @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   // @JsonIgnore
+  //  private List<Product> products;
 
     @Override
     public String toString() {

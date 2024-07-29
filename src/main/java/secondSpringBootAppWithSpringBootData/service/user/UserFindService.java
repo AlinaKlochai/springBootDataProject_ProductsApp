@@ -9,6 +9,7 @@ import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.UserRepository;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class UserFindService {
