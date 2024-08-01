@@ -67,7 +67,7 @@ public class AddProductService {
             productForAdd.setDescription(requestDto.getDescription());
 
             String imageUrl = supabaseService.uploadImage(image);
-            productForAdd.setLink(imageUrl);
+            productForAdd.setImageUrl(imageUrl);
 
             productRepository.save(productForAdd);
             return new ResponseEntity<>(new OneMessageDTO("Product successfully created"), HttpStatus.CREATED);
