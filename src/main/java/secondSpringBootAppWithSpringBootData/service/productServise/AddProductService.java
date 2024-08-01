@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import secondSpringBootAppWithSpringBootData.dto.RegionDto;
 import secondSpringBootAppWithSpringBootData.dto.appDTO.OneMessageDTO;
 import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateRequestDto;
@@ -24,6 +25,7 @@ import secondSpringBootAppWithSpringBootData.service.user.UserFindService;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -34,9 +36,10 @@ public class AddProductService {
     private final ProductConverter productConverter;
     private final RegionRepository regionRepository;
     private final UserFindService userFindService;
+    private final SupabaseService supabaseService;
 
     @Transactional
-    public ResponseEntity<?> addProduct(ProductCreateRequestDto requestDto) {
+    public ResponseEntity<?> addProduct(ProductCreateRequestDto requestDto, MultipartFile image) {
         List<ValidationErrorDto> errors = new ArrayList<>();
 
         // Validate and fetch the Category entity
@@ -62,6 +65,9 @@ public class AddProductService {
             productForAdd.setCategory(category);
             productForAdd.setRegion(region);
             productForAdd.setDescription(requestDto.getDescription());
+
+            String imageUrl = supabaseService.uploadImage(image);
+            productForAdd.setLink(imageUrl);
 
             productRepository.save(productForAdd);
             return new ResponseEntity<>(new OneMessageDTO("Product successfully created"), HttpStatus.CREATED);
@@ -95,5 +101,38 @@ public class AddProductService {
                     errors.add(new ValidationErrorDto("region", "Region with name " + regionDto.getRegionName() + " not found."));
                     return null; // Return null if region is not found
                 });
+    }
+
+    @Transactional
+    public ResponseEntity<?> addProductWithoutImage(ProductCreateRequestDto requestDto) {
+        List<ValidationErrorDto> errors = new ArrayList<>();
+
+        // Валидация и получение категории и региона
+        Category category = validateAndFetchCategory(requestDto.getCategory(), errors);
+        Region region = validateAndFetchRegion(requestDto.getRegion(), errors);
+
+        // Если есть ошибки валидации, возвращаем их
+        if (!errors.isEmpty()) {
+            return new ResponseEntity<>(new ValidationErrorsDto(errors), HttpStatus.BAD_REQUEST);
+        }
+
+        // Процесс создания продукта
+        try {
+            Product productForAdd = productConverter.fromDto(requestDto);
+
+            productForAdd.setIsInStock(requestDto.getIsInStock() != null ? requestDto.getIsInStock() : true);
+            User user = userFindService.getUserFromContext();
+            productForAdd.setUser(user);
+            productForAdd.setCategory(category);
+            productForAdd.setRegion(region);
+            productForAdd.setDescription(requestDto.getDescription());
+
+            // Сохраняем продукт без изображения
+            productRepository.save(productForAdd);
+            return new ResponseEntity<>(new OneMessageDTO("Product successfully created"), HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new OneMessageDTO("An unexpected error occurred. Please try again later."), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

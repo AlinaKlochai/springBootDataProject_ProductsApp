@@ -28,6 +28,14 @@ public interface DeleteProductControllerApi {
             @ApiResponse(responseCode = "409", description = "Only the author can delete their ad",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"You do not have permission to delete this product\"}"))),
+            @ApiResponse(responseCode = "403", description = "Forbidden",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"timestamp\": \"2024-07-30T16:41:37.865+00:00\",\n" +
+                                    "    \"status\": 403,\n" +
+                                    "    \"error\": \"Forbidden\",\n" +
+                                    "    \"path\": \"/api/rent/...\"\n" +
+                                    "}"))),
             @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"Internal server error.\"}")))

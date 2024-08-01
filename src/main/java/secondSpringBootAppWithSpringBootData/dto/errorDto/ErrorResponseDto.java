@@ -11,7 +11,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ErrorResponseDto {
     private String message;
-    private List<FieldErrorDto> fieldErrors;
+     private List<FieldErrorDto> fieldErrors;
 
     public ErrorResponseDto(String message) {
         this.message = message;

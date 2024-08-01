@@ -29,7 +29,7 @@ public class Product {
     private Boolean isInStock;
 
     @Column(length = 1000)
-    private String link;
+    private String imageUrl;
 
     @Column(length = 500)
     private String description;

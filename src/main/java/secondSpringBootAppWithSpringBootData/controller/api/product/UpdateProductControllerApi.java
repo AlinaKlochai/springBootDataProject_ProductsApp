@@ -18,20 +18,28 @@ import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
 public interface UpdateProductControllerApi {
 
     @Operation(summary = "Update a product by ID",
-            description = "Updates an existing product identified by its ID.")
+            description = "Updates an existing product identified by its ID. " +
+                    "Note: The fields `category` and `region` will be ignored.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Product successfully updated",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"Product successfully updated\"}"))),
-            @ApiResponse(responseCode = "400",
-                    description = "Invalid input data or category/user not found",
+            @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"message\": \"Category/region with name ... not found.\"}"))),
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"timestamp\": \"2024-07-30T16:41:37.865+00:00\",\n" +
+                                    "    \"status\": 403,\n" +
+                                    "    \"error\": \"Forbidden\",\n" +
+                                    "    \"path\": \"/api/rent/...\"\n" +
+                                    "}"))),
             @ApiResponse(responseCode = "404",
                     description = "Product not found with the given ID",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"Product with ID ... not found.\"}"))),
+            @ApiResponse(responseCode = "409", description = "Only the author can update their ad",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{ \"message\": \"You do not have permission to update this product\"}"))),
             @ApiResponse(responseCode = "500",
                     description = "Internal server error",
                     content = @Content(mediaType = "application/json",
@@ -42,9 +50,9 @@ public interface UpdateProductControllerApi {
             @Parameter(description = "ID of the product to be updated", example = "1")
             @PathVariable Long id,
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Product data to update",
+                    description = "Product data to update. Fields `category` and `region` will be ignored.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProductCreateRequestDto.class),
-                            examples = @ExampleObject(value = "{ \"name\": \"New Product Name\", \"category\": { \"name\": \"New Category\" }, \"price\": 99.99, \"description\": \"Updated description\", \"isInStock\": true, \"region\": { \"regionName\": \"New Region\" }}")))
+                            examples = @ExampleObject(value = "{ \"name\": \"New Product Name\", \"price\": 99.99, \"description\": \"Updated description\" }")))
             @RequestBody ProductCreateRequestDto productCreateRequestDto);
 }

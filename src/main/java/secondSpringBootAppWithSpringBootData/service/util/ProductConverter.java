@@ -68,9 +68,9 @@ public class ProductConverter {
         if(product.getPrice() != null){
             productResponseDto.setPrice(product.getPrice());
         }
-        if(product.getIsInStock() != null){
-            productResponseDto.setIsInStock(product.getIsInStock());
-        }
+       // if(product.getIsInStock() != null){
+        //    productResponseDto.setIsInStock(product.getIsInStock());
+       // }
 
         if(product.getDescription() != null){
             productResponseDto.setDescription(product.getDescription());
@@ -82,6 +82,10 @@ public class ProductConverter {
         }
         if(product.getUser() !=null){
             productResponseDto.setOwner(userDto);
+        }
+
+        if(product.getImageUrl() != null){
+            productResponseDto.setImageUrl(product.getImageUrl());
         }
 
         return productResponseDto;

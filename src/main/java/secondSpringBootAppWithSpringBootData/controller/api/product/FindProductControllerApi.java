@@ -31,12 +31,31 @@ public interface FindProductControllerApi {
             @ApiResponse(responseCode = "200", description = "Products found",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"products\": [...], \"error\": null }"))),
-            @ApiResponse(responseCode = "400", description = "Validation error or no products found for criteria",
+            @ApiResponse(responseCode = "400", description = "Validation error",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"error\": {\"message\": \"Errors occurred\", \"fieldErrors\": [{\"field\": \"region\", \"message\": \"Region not found\"}] }} }"))),
-            @ApiResponse(responseCode = "404", description = "Region or category not found",
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"products\": [],\n" +
+                                    "    \"error\": {\n" +
+                                    "        \"message\": \"Errors occurred\",\n" +
+                                    "        \"fieldErrors\": [\n" +
+                                    "            {\n" +
+                                    "                \"field\": \"region\",\n" +
+                                    "                \"message\": \"Region not found\"\n" +
+                                    "            },\n" +
+                                    "            {\n" +
+                                    "                \"field\": \"category\",\n" +
+                                    "                \"message\": \"Category not found\"\n" +
+                                    "            }\n" +
+                                    "        ]\n" +
+                                    "    },\n" +
+                                    "    \"totalElements\": 0,\n" +
+                                    "    \"totalPages\": 0\n" +
+                                    "}"))),
+            @ApiResponse(responseCode = "404", description = "No products found for the given criteria",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"error\": {\"message\": \"Errors occurred\", \"fieldErrors\": [{\"field\": \"category\", \"message\": \"Category not found\"}] }} }")))
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"message\": \"No products found for the given criteria\"\n" +
+                                    "}")))
     })
     @GetMapping
     ResponseEntity<ProductSearchResponse> findProducts(
@@ -44,4 +63,39 @@ public interface FindProductControllerApi {
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") int page);
+
+    /**
+     * Finds product by ID.
+     *
+     * @param id the ID of the product.
+     * @return ResponseEntity with the response containing the product or an error message.
+     */
+    @Operation(summary = "Search product by ID",
+            description = "Operation to search for a product by ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product found",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"name\": \"SUP\",\n" +
+                                    "    \"category\": {\n" +
+                                    "        \"name\": \"Vehicles\"\n" +
+                                    "    },\n" +
+                                    "    \"price\": 30.0,\n" +
+                                    "    \"description\": \"A high quality SUP suitable for a good time.\",\n" +
+                                    "    \"region\": {\n" +
+                                    "        \"regionName\": \"Bremen\"\n" +
+                                    "    },\n" +
+                                    "    \"isInStock\": true,\n" +
+                                    "    \"owner\": {\n" +
+                                    "        \"name\": \"john\"\n" +
+                                    "    }\n" +
+                                    "}"))),
+            @ApiResponse(responseCode = "404", description = "Product not found",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"message\": \"Product not found with id: ...\"\n" +
+                                    "}")))
+    })
+    @GetMapping("/{id}")
+    ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id);
 }

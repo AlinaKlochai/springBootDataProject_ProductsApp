@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import secondSpringBootAppWithSpringBootData.controller.api.product.FindProductControllerApi;
 import secondSpringBootAppWithSpringBootData.dto.ProductSearchResponse;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductResponseDto;
 import secondSpringBootAppWithSpringBootData.service.productServise.FindProductService;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/rents")
-public class FindProductController{
+public class FindProductController implements FindProductControllerApi {
 
     private final FindProductService findProductService;
 

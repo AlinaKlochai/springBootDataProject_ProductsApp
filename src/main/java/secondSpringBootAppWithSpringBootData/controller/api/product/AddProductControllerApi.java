@@ -24,7 +24,18 @@ public interface AddProductControllerApi {
                             examples = @ExampleObject(value = "{ \"message\": \"Product successfully created\"}"))),
             @ApiResponse(responseCode = "404", description = "Region or category not found",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"message\": \"Region or category with name X not found.\" }"))),
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"errors\": [\n" +
+                                    "        {\n" +
+                                    "            \"field\": \"category\",\n" +
+                                    "            \"message\": \"Category with name ... not found.\"\n" +
+                                    "        },\n" +
+                                    "        {\n" +
+                                    "            \"field\": \"region\",\n" +
+                                    "            \"message\": \"Region with name ... not found.\"\n" +
+                                    "        }\n" +
+                                    "    ]\n" +
+                                    "}"))),
             @ApiResponse(responseCode = "500", description = "An unexpected error occurred",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"An unexpected error occurred. Please try again later.\" }")))

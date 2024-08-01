@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 import secondSpringBootAppWithSpringBootData.dto.RegionDto;
 import secondSpringBootAppWithSpringBootData.dto.categoryDto.CategoryCreateRequestDto;
 import secondSpringBootAppWithSpringBootData.entity.Region;
@@ -40,5 +41,8 @@ public class ProductCreateRequestDto {
     @Schema(description = "Region where the product is available", example = "Bremen")
     private RegionDto region;
     //private Long user;
+
+    @Schema(description = "Product image in base64 format")
+    private String imageUrl;
 
 }

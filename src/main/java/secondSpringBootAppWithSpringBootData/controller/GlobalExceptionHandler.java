@@ -16,6 +16,7 @@ import secondSpringBootAppWithSpringBootData.dto.validationErrorDto.ValidationEr
 import secondSpringBootAppWithSpringBootData.exception.AlreadyExistException;
 import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class GlobalExceptionHandler {
             FieldErrorDto fieldError = FieldErrorDto.builder()
                     .field(violation.getPropertyPath().toString())
                     .message(violation.getMessage())
-                    .rejectedValue(violation.getInvalidValue())
+                    //.rejectedValue(violation.getInvalidValue())
                     .build();
             fieldErrors.add(fieldError);
         });
@@ -93,9 +94,9 @@ public class GlobalExceptionHandler {
                     .message(fieldError.getDefaultMessage())
                     .build();
 
-            if (fieldError.getRejectedValue() != null) {
-                errorDto.setRejectedValue(fieldError.getRejectedValue().toString());
-            }
+            //if (fieldError.getRejectedValue() != null) {
+             //   errorDto.setRejectedValue(fieldError.getRejectedValue().toString());
+            //}
 
             validationErrors.add(errorDto);
         }
@@ -105,5 +106,14 @@ public class GlobalExceptionHandler {
                 .body(ValidationErrorsDto.builder()
                         .errors(validationErrors)
                         .build());
+    }
+
+    //для доп обработки при загрузки фото
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ErrorResponseDto> handleIOException(IOException exception) {
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
+                .message("An input/output error occurred: " + exception.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
