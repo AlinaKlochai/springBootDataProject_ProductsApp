@@ -1,21 +1,16 @@
 package secondSpringBootAppWithSpringBootData.service.productServise;
 
-import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import secondSpringBootAppWithSpringBootData.config.SupabaseConfig;
-import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Base64;
 import java.util.UUID;
 
 @Service

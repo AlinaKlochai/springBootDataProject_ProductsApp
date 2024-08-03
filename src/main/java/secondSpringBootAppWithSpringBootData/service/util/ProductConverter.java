@@ -58,6 +58,8 @@ public class ProductConverter {
         ProductResponseDto productResponseDto = new ProductResponseDto();
         UserJustWithNameDto userDto = new UserJustWithNameDto(product.getUser().getName());
 
+        productResponseDto.setId(product.getId());
+
         if(product.getName() != null){
             productResponseDto.setName(product.getName());
         }

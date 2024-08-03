@@ -16,16 +16,13 @@ import secondSpringBootAppWithSpringBootData.entity.Region;
 import secondSpringBootAppWithSpringBootData.entity.User;
 import secondSpringBootAppWithSpringBootData.entity.Product;
 import secondSpringBootAppWithSpringBootData.dto.productDto.ProductCreateRequestDto;
-import secondSpringBootAppWithSpringBootData.exception.NotFoundException;
 import secondSpringBootAppWithSpringBootData.repository.CategoryRepository;
 import secondSpringBootAppWithSpringBootData.repository.RegionRepository;
-import secondSpringBootAppWithSpringBootData.repository.UserRepository;
 import secondSpringBootAppWithSpringBootData.repository.ProductRepository;
 import secondSpringBootAppWithSpringBootData.service.user.UserFindService;
 import secondSpringBootAppWithSpringBootData.service.util.ProductConverter;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @Service
